@@ -1,5 +1,5 @@
 <section class="section-chat">
-  <ul>
+  <ul #chat>
     <li class="message" [ngClass]="{'message-self': message.author === currentAuthor}" *ngFor="let message of messages">
       <span class="message__content">{{ message.content }}</span>
       <span class="message__timestamp">{{ message.timestamp | timestamp }}</span>
