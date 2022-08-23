@@ -1,72 +1,61 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Message } from './message.model';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class MessagesService {
-  private messages: Message[] = [];
+  private messages: any = [];
   private messagesUpdated = new Subject<Message[]>();
 
-  getMessages() {
-    this.messages = [
-      {
-        author: 'Ezio',
-        content: 'Est-ce un test svp?',
-        timestamp: '14:15',
-        id: '1',
-      },
-      {
-        author: 'Ezio',
-        content: 'ALLO !! 😴',
-        timestamp: '14:24',
-        id: '2',
-      },
-      {
-        author: 'Jean-Bob',
-        content: "Bonsoir, ceci n'est pas un test.",
-        timestamp: '14:29',
-        id: '3',
-      },
-      {
-        author: 'Ezio',
-        content: 'Io mangio la mela...! 🥴',
-        timestamp: '14:33',
-        id: '4',
-      },
-    ];
+  constructor(private http: HttpClient) {}
 
-    return this.messages;
+  getMessages() {
+    this.http
+      .get<{ message: string; data: any }>('http://localhost:8080/messages')
+      .pipe(
+        map((result) => {
+          return result.data.map((message: any) => {
+            return {
+              author: message.author,
+              content: message.content,
+              id: message._id,
+              timestamp: message.createdAt,
+            };
+          });
+        })
+      )
+      .subscribe((messages) => {
+        this.messages = messages;
+        this.messagesUpdated.next([...this.messages]);
+      });
   }
 
   getMessageUpdateListener() {
     return this.messagesUpdated.asObservable();
   }
 
-  getFormattedDate(date: Date, format: string) {
-    console.log(date);
-    const YYYY = date.getFullYear().toString();
-    const MM = (date.getMonth() + 1).toString().padStart(2, '0');
-    const DD = date.getDate().toString().padStart(2, '0');
-    const hh = date.getHours().toString().padStart(2, '0');
-    const mm = date.getMinutes().toString().padStart(2, '0');
-    const ss = date.getSeconds().toString().padStart(2, '0');
-    format = format.replace('YYYY', YYYY);
-    format = format.replace('MM', MM);
-    format = format.replace('DD', DD);
-    format = format.replace('hh', hh);
-    format = format.replace('mm', mm);
-    format = format.replace('ss', ss);
-    return format;
-  }
-
   addMessage(author: string, content: string) {
     const message: Message = {
-      id: '',
       author: author || 'Anonymous',
       content: content,
-      timestamp: this.getFormattedDate(new Date(), 'hh:mm'),
+      id: '',
+      timestamp: '',
     };
-    console.log(message);
-    this.messages.push(message);
+
+    this.http
+      .post<{ message: string; messageId: string; createdAt: string; }>(
+        'http://localhost:8080/messages',
+        message
+      )
+      .subscribe((responseData) => {
+        const timestamp = responseData.createdAt;
+        const id = responseData.messageId;
+        message.id = id;
+        message.timestamp = timestamp;
+        this.messages.push(message);
+        this.messagesUpdated.next([...this.messages]);
+      });
   }
 }

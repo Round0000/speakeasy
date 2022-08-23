@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { Message } from '../message.model';
@@ -12,7 +12,7 @@ import { MessagesService } from '../messages.service';
 export class ChatComponent implements OnInit {
   currentAuthor = 'Jean-Bob';
 
-  messages: Message[] = [];
+  messages: any = [];
   private messagesSub: Subscription = new Subscription();
 
   constructor(public messagesService: MessagesService) {}
@@ -31,5 +31,9 @@ export class ChatComponent implements OnInit {
 
     this.messagesService.addMessage(form.value.author, form.value.content);
     form.resetForm();
+  }
+
+  ngOnDestroy(): void {
+    this.messagesSub.unsubscribe();
   }
 }
