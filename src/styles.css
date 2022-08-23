@@ -1,1 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  --clr-blue: #1fb6ff;
+  --clr-purple: #7e5bef;
+  --clr-pink: #ff49db;
+  --clr-orange: #ff7849;
+  --clr-green: #13ce66;
+  --clr-yellow: #ffc82c;
+  --clr-gray-dark: #273444;
+  --clr-gray: #8492a6;
+  --clr-gray-light: #d3dce6;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Atkinson Hyperlegible', Tahoma, sans-serif;
+}
+
+input,
+button {
+  font-family: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/*****************/

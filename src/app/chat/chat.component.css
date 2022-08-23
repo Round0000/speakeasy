@@ -1,0 +1,82 @@
+.section-chat {
+  max-width: 40em;
+  margin: 1em auto;
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ddd2;
+}
+
+ul {
+  height: 70vh;
+  overflow-y: scroll;
+  margin-bottom: 1em;
+  padding: .5em;
+}
+
+.section-chat *::selection {
+  background-color: var(--clr-yellow);
+  color: #222;
+}
+
+.message {
+  background-color: hsl(213, 38%, 94%);
+  max-width: 80%;
+  padding: .5em .75em;
+  border: 1px solid #0001;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0 8px 8px;
+}
+
+.message-self {
+  margin-left: auto;
+  background-color: hsl(190, 20%, 40%);
+  color: #fff;
+  border-radius: 8px 0 8px 8px;
+}
+
+.message__timestamp {
+  font-size: .8rem;
+  color: #444;
+  align-self: flex-end;
+}
+
+.message-self .message__timestamp {
+  color: #fffc;
+}
+
+li + li {
+  margin-top: .5em;
+}
+
+form {
+  display: flex;
+}
+
+form input,
+form button {
+  all: unset;
+  border: 2px solid #0003;
+  padding: .25em .5em;
+}
+
+form input {
+  flex: 1;
+  background-color: #fff;
+  border-right: none;
+}
+
+form input:focus {
+  outline: 2px solid var(--clr-blue);
+  outline-offset: -2px;
+}
+
+form button {
+  background-color: var(--clr-blue);
+}
+
+form button:focus {
+  border-color: #0008;
+}

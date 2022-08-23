@@ -1,0 +1,12 @@
+<section class="section-chat">
+  <ul>
+    <li class="message" [ngClass]="{'message-self': message.author === currentAuthor}" *ngFor="let message of messages">
+      <span class="message__content">{{ message.content }}</span>
+      <span class="message__timestamp">{{ message.timestamp }}</span>
+    </li>
+  </ul>
+  <form (submit)="onAddMessage(messageForm)" #messageForm="ngForm">
+    <input ngModel required type="text" name="content" id="new-message-input" placeholder="Tapez votre message..." />
+    <button type="submit">Envoyer</button>
+  </form>
+</section>

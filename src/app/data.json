@@ -1,0 +1,26 @@
+[
+  {
+    "author": "Ezio",
+    "content": "Est-ce un test svp?",
+    "timestamp": "14:15",
+    "id": "1"
+  },
+  {
+    "author": "Ezio",
+    "content": "ALLO !! 😴",
+    "timestamp": "14:24",
+    "id": "2"
+  },
+  {
+    "author": "Jean-Bob",
+    "content": "Bonsoir, ceci n'est pas un test.",
+    "timestamp": "14:29",
+    "id": "3"
+  },
+  {
+    "author": "Ezio",
+    "content": "Io mangio la mela...! 🥴",
+    "timestamp": "14:33",
+    "id": "4"
+  }
+]
