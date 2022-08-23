@@ -8,12 +8,13 @@ import { map } from 'rxjs/operators';
 export class MessagesService {
   private messages: any = [];
   private messagesUpdated = new Subject<Message[]>();
+  private host: string = 'https://speakeasy-backend.herokuapp.com/';
 
   constructor(private http: HttpClient) {}
 
   getMessages() {
     this.http
-      .get<{ message: string; data: any }>('http://localhost:8080/messages')
+      .get<{ message: string; data: any }>(this.host + 'messages')
       .pipe(
         map((result) => {
           return result.data.map((message: any) => {
@@ -45,8 +46,8 @@ export class MessagesService {
     };
 
     this.http
-      .post<{ message: string; messageId: string; createdAt: string; }>(
-        'http://localhost:8080/messages',
+      .post<{ message: string; messageId: string; createdAt: string }>(
+        this.host + 'messages',
         message
       )
       .subscribe((responseData) => {
