@@ -1,18 +1,17 @@
 .section-chat {
   max-width: 40em;
-  margin: 1em auto;
-  padding: 1.5em;
+  margin: auto;
+  padding: 1em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #ddd2;
 }
 
 ul {
   height: 70vh;
   overflow-y: scroll;
   margin-bottom: 1em;
-  padding: .5em;
+  padding: .25em;
 }
 
 .section-chat *::selection {
